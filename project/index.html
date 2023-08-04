@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>𝒯𝒽𝑒 𝒾𝓈𝓁𝑒 𝑜𝒻 𝒸𝒶𝓉</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Helvetica, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    a {
+      color: #000;
+    }
+
+    /* header */
+    .header {
+      background-color: #fff;
+      box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+      position: fixed;
+      width: 100%;
+      z-index: 3;
+    }
+
+    .header ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .header li a {
+      display: block;
+      padding: 20px 20px;
+      border-right: 1px solid #f4f4f4;
+      text-decoration: none;
+    }
+
+    .header li a:hover,
+    .header .menu-btn:hover {
+      background-color: #f4f4f4;
+    }
+
+    .header .logo {
+      display: block;
+      float: left;
+      font-size: 2em;
+      padding: 10px 20px;
+      text-decoration: none;
+    }
+
+    .header .menu {
+      clear: both;
+      max-height: 0;
+      transition: max-height .2s ease-out;
+    }
+
+    
+    .header .menu-icon .navicon:before,
+    .header .menu-icon .navicon:after {
+      background: #333;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      transition: all .2s ease-out;
+      width: 100%;
+    }
+
+    .header .menu-icon .navicon:before {
+      top: 0;
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .header .menu-icon .navicon:after {
+      top: 0;
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .header .menu-btn {
+      display: none;
+    }
+
+    .header .menu-btn:checked ~ .menu {
+      max-height: 240px;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon {
+      background: transparent;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:before {
+      transform: rotate(0);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:after {
+      transform: rotate(0);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+      top: 0;
+    }
+
+    /* Add this style to disable the link */
+    .header .logo.disabled {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    @media (min-width: 48em) {
+      .header li {
+        float: left;
+      }
+      .header li a {
+        padding: 20px 30px;
+      }
+      .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+      }
+      .header .menu-icon {
+        display: none;
+      }
+    }
+    .header .menu ul {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 0;
+      margin-top: 20px;
+      min-width: 120px;
+      z-index: 2;
+    }
+
+    .header .menu ul li {
+      padding: 10px;
+      list-style: none;
+    }
+
+    .header .menu ul li a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .header .menu ul li a:hover {
+      background-color: #f4f4f4;
+    }
+
+    .header a:hover {
+    /* 添加颜色 */
+    color: #2F6F65;
+    /* 添加文本阴影 */
+    text-shadow: 0 0 10px #92D6B9;
+    }
+    
+    .square {
+            width: 100px;
+     	 	height: 100px;
+      		margin: 0px;
+      		float: left;
+      		position: relative;
+      		background-size: cover;
+      		background-repeat: no-repeat;
+        }
+
+        #square1 {
+            width: 100%;
+            height: 800px;
+            background-color: red;
+            margin-top: 51px;
+            background-image: url('/image/test1.png');
+            background-size: 100% 800px;
+            background-color: transparent; /* 将背景色设置为透明 */
+}
+
+    	
+        #square2 {
+            width: 100%;
+            height: 800px;
+            background-color: yellow;
+    		top: 0px; /* 下移20像素 */
+            background-image: url('/image/test3.png');
+            background-size: 100% 800px;
+            background-color: transparent; /* 将背景色设置为透明 */
+		}
+        #square3 {
+            width: 100%;
+            height: 800px;
+            background-color: yellow;
+    		top: 0px; /* 下移20像素 */
+            background-image: url('/image/test4.png');
+            background-size: 100% 800px;
+            background-color: transparent; /* 将背景色设置为透明 */
+		}
+        #square4 {
+            width: 100%;
+            height: 100vh;
+            background-color: yellow;
+    		top: 0px; /* 下移20像素 */
+            background-image: url('/image/test5.png');
+            background-color: transparent; /* 将背景色设置为透明 */
+		}
+       /* 新方塊的樣式 */
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: transparent; /* 將方塊底色設置為透明 */
+      position: absolute; /* 將方塊設置為絕對定位 */
+      color: #fff; /* 文字顏色設置為白色，這樣可以更好地看到文字 */
+    }
+
+    /* 分別設置三個新方塊的位置 */
+    .box1 {
+      top: 350px;
+      left: 80px;
+    }
+
+    .box2 {
+      top: 350px;
+      left: 250px;
+    }
+
+    .box3 {
+      top: 00px;
+      left: 1100px;
+    }
+
+    .box4 {
+      top: 150px;
+      left: 450px;
+    }
+
+    .box5 {
+      top: -50px;
+      left: 400px;
+    }
+
+    .box6 {
+      top: 150px;
+      left: 1000px;
+    }
+
+    .box7 {
+      top: 450px;
+      left: 900px;
+    }
+
+    .box8 {
+      top: 420px;
+      left: 1500px;
+    }
+
+
+  </style>
+
+<script>
+  // 初始化購物車數量為 0
+  let cartItemCount = 0;
+
+  // 加入購物車的按鈕事件處理函式
+  function addToCart() {
+    // 將購物車數量增加 1
+    cartItemCount++;
+
+    // 更新顯示購物車數量的元素
+    const cartCountElement = document.getElementById('cart-count');
+    cartCountElement.innerText = cartItemCount;
+  }
+</script>
+</head>
+<body>
+  <header class="header">
+    <!-- Add class "disabled" to disable the link -->
+    <a href="" class="logo disabled">𝒯𝒽𝑒 𝒾𝓈𝓁𝑒 𝑜𝒻 𝒸𝒶𝓉</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li><a href="index.html">首頁</a></li> 
+      <li><a href="https://www.instagram.com/theisleof.cat_ore/" target="_blank">Instagram</a></li>
+      <li>
+        <a href="product.html" target="_blank">商品</a>
+        </li>
+      <li><a href="cart.html">購物車</a></li>
+    </ul>
+  </header>
+    <div class="square" id="square1">
+        <!-- 新方塊的內容 -->
+      <!-- 新的方塊1 -->
+    <div class="box box1">
+      <p></p>
+      <img src="/image/test10.png" alt="圖片描述"style="width: 150px; height: 150px;">
+    </div>
+    <!-- 新的方塊2 -->
+    <div class="box box2"  style="width: 1200px; height: 100px; color: black;" >
+      <p style="font-size: 36px;">歡迎來到貓嶼礦的小天地!<br>
+        願您找到屬於自己的心儀寶貝<br>
+      </p>
+        </div>
+      </div>
+
+    <div class="square" id="square2">
+      <div class="box box3">
+        <p></p>
+        <img src="/image/test7.png" alt="圖片描述"style="width: 500px; height: 500px;">
+      </div>
+      <div class="box box4"  style="width: 1200px; height: 100px; color: black;" >
+        <h1 style="font-size: 36px;">藍銅礦</h1>
+          <h2 style="font-size: 26px;">藍銅礦，又稱石青。<br>
+          是一種柔軟的深藍色含銅礦物，由銅礦床風化而成。<br>
+          在古代被當做護身石、聖石。
+          </h2>
+          <h3 style="font-size: 16px;">藍銅礦功效：<br>
+          幫助你思想清晰。<br>
+          加強表達能力、溝通能力及說服力。<br>
+          帶給你安靜、自信和安全感。
+          </h3>
+        </div> 
+
+        <div class="box box7">
+          <a href="product.html" target="_blank" style="font-size: 30px;">去購物</a>
+        </div>
+          
+    </div>
+
+    <div class="square" id="square3">
+      <div class="box box5">
+        <p></p>
+        <img src="/image/test8.png" alt="圖片描述"style="width: 500px; height: 550px;">
+      </div>
+      <div class="box box6"  style="width: 1200px; height: 100px; color: black;" >
+        <h1 style="font-size: 36px;">螢石</h1>
+        <h2 style="font-size: 26px;">螢石，又稱氟石、砩石。<br>
+        有多種顏色，因此被稱為「世界上最豐富多彩的礦物」。<br>
+        螢石也被稱為「智慧之石」。
+        </h2>
+        <h3 style="font-size: 16px;">螢石功效：<br>
+        幫助注意力集中、保持頭腦清晰。<br>
+        提高創意、靈性及直覺判斷能力。<br>
+        有助提振精神，平復情緒。
+        </h3>
+          </div> 
+
+      <div class="box box8">
+        <a href="product.html" target="_blank" style="font-size: 30px;">去購物</a>
+      </div>
+    </div>
+
+    <div class="square" id="square4">
+      <div class="box box3">
+        <p></p>
+        <img src="/image/test9.png" alt="圖片描述"style="width: 500px; height: 550px;">
+      </div>
+      <div class="box box4"  style="width: 1200px; height: 100px; color: black;" >
+        <h1 style="font-size: 36px;">氟鋁石膏</h1>
+        <h2 style="font-size: 26px;">氟鋁石膏是一種稀有的鹵化物礦物。<br>
+        因可愛的的外型又被稱為「爆米花晶體」!<br>
+        有許多特別的顏色，稀有少見的顏色也讓收藏者為之瘋狂。
+        </h2>
+        <h3 style="font-size: 16px;">氟鋁石膏功效：<br>
+        可淨化心靈。<br>
+        療癒身心。<br>
+        可愛可愛跟可愛。
+        </h3>
+          </div>
+          
+          <div class="box box7">
+            <a href="product.html" target="_blank" style="font-size: 30px;">去購物</a>
+          </div>
+    </div>
+</body>
+</html>
+

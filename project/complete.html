@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>訂單確認</title>
+  <!-- 可以添加自定义样式 -->
+  <style>
+    body {
+      font-family: Helvetica, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .confirmation {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation">
+    <h1>礦礦邀請成功!</h1>
+    <p>謝謝您的邀請！您的訂單已成功送出。</p>
+    <p>貓嶼會盡快安排您的礦礦出發，請留意電話或簡訊呦!</p>
+    <div class="form-info">
+      <h2>您的訂購資料</h2>
+      <p>姓名：<span id="name"></span></p>
+      <p>電話：<span id="phone"></span></p>
+      <p>電子郵件：<span id="email"></span></p>
+      <p>7-11店號：<span id="store_name"></span></p>
+    </div>
+    <div class="cart-items-info">
+      <h2>礦礦信息</h2>
+      <div class="cartItems"></div>
+    </div>
+    <!-- 可以添加其他自定义内容，如订单号、联系方式等 -->
+  </div>
+  <script>
+    // 获取URL参数的函数
+    function getURLParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const params = {};
+      for (const [key, value] of urlParams) {
+        params[key] = value;
+      }
+      return params;
+    }
+  
+    window.onload = function () {
+      const params = getURLParams();
+
+      // 显示客户填写的表单内容
+      document.getElementById('name').textContent = params.name;
+      document.getElementById('phone').textContent = params.phone;
+      document.getElementById('email').textContent = params.email;
+      document.getElementById('store_name').textContent = params.store_name;
+
+      // 显示购物车商品信息
+      const cartItems = JSON.parse(params.cartItems);
+      const cartItemsDiv = document.querySelector(".cartItems"); // 修改这里，选择新添加的容器
+      cartItemsDiv.innerHTML = ""; // 清空容器的内容
+
+      let totalAmount = 0; // 新增变量用于计算总金额
+
+      cartItems.forEach((item) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("cartItem");
+
+        const itemImageDiv = document.createElement("div");
+        itemImageDiv.innerHTML = `<img src="${item.imagePath}" alt="${item.productName}" style="width: 150px; height: 150px;">`;
+        itemDiv.appendChild(itemImageDiv);
+
+        const itemInfoDiv = document.createElement("div");
+        itemInfoDiv.classList.add("cartItemInfo");
+        itemInfoDiv.innerHTML = `
+          <p style="font-size: 20px;"><strong>${item.productName}</strong></p>
+          <p style="font-size: 20px;">數量: ${item.quantity}</p>
+          <p style="font-size: 20px;">金額: ${item.price}</p>
+        `;
+        itemDiv.appendChild(itemInfoDiv);
+
+        cartItemsDiv.appendChild(itemDiv);
+
+        totalAmount += item.price; // 计算总金额
+      });
+
+      const totalAmountElement = document.createElement('p');
+      totalAmountElement.textContent = `總金額：$${totalAmount}`;
+      totalAmountElement.style.fontSize = '25px'; // 设置总金额文字的大小
+      cartItemsDiv.appendChild(totalAmountElement);
+    };
+  </script>
+  
+</body>
+</html>

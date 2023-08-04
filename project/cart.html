@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>𝒯𝒽𝑒 𝒾𝓈𝓁𝑒 𝑜𝒻 𝒸𝒶𝓉</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Helvetica, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    a {
+      color: #000;
+    }
+
+    /* header */
+    .header {
+      background-color: #fff;
+      box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+      position: fixed;
+      width: 100%;
+      z-index: 3;
+    }
+
+    .header ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .header li a {
+      display: block;
+      padding: 20px 20px;
+      border-right: 1px solid #f4f4f4;
+      text-decoration: none;
+    }
+
+    .header li a:hover,
+    .header .menu-btn:hover {
+      background-color: #f4f4f4;
+    }
+
+    .header .logo {
+      display: block;
+      float: left;
+      font-size: 2em;
+      padding: 10px 20px;
+      text-decoration: none;
+    }
+
+    .header .menu {
+      clear: both;
+      max-height: 0;
+      transition: max-height .2s ease-out;
+    }
+
+    .header .menu-icon .navicon {
+      background: #333;
+      display: block;
+      height: 2px;
+      position: relative;
+      transition: background .2s ease-out;
+      width: 18px;
+    }
+
+    .header .menu-icon .navicon:before,
+    .header .menu-icon .navicon:after {
+      background: #333;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      transition: all .2s ease-out;
+      width: 100%;
+    }
+
+    .header .menu-icon .navicon:before {
+      top: 0;
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .header .menu-icon .navicon:after {
+      top: 0;
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .header .menu-btn {
+      display: none;
+    }
+
+    .header .menu-btn:checked ~ .menu {
+      max-height: 240px;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon {
+      background: transparent;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:before {
+      transform: rotate(0);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:after {
+      transform: rotate(0);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+      top: 0;
+    }
+
+    /* Add this style to disable the link */
+    .header .logo.disabled {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    @media (min-width: 48em) {
+      .header li {
+        float: left;
+      }
+      .header li a {
+        padding: 20px 30px;
+      }
+      .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+      }
+      .header .menu-icon {
+        display: none;
+      }
+    }
+    .header .menu ul {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 0;
+      margin-top: 20px;
+      min-width: 120px;
+      z-index: 2;
+    }
+
+    .header .menu ul li {
+      padding: 10px;
+      list-style: none;
+    }
+
+    .header .menu ul li a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .header .menu ul li a:hover {
+      background-color: #f4f4f4;
+    }
+
+        .header a {
+    /* 添加过渡效果 */
+    transition: all 0.3s ease-in-out;
+    }
+
+    .header a:hover {
+    /* 添加颜色 */
+    color: #2F6F65;
+    /* 添加文本阴影 */
+    text-shadow: 0 0 10px #92D6B9;
+    }
+    
+    
+    .square {
+            width: 100px;
+     	 	height: 100px;
+      		margin: 0px;
+      		float: left;
+      		position: relative;
+      		background-size: cover;
+      		background-repeat: no-repeat;
+        }
+
+    #square1 {
+    width: 100%;
+    height: 800px;
+    background-color: red;
+    margin-top: 51px;
+    background-image: url('/image/test1.png');
+    background-size: 100% 800px;
+    background-color: transparent; /* 将背景色设置为透明 */
+    }
+
+	#square2 {
+  	width: 100%;
+ 	height: 100%; /* 填满整个屏幕高度 */
+  	background-color: yellow;
+ 	top: 0; /* 保持在页面顶部 */
+    background-image: url('/image/test2.png');
+    background-color: transparent; /* 将背景色设置为透明 */
+	}
+
+    /* 購物車數字樣式 */
+    #cart-count {
+    background-color: #ff6600;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 10px;
+    margin-left: 5px;
+    font-size: 0.8em;
+    position: relative;
+    top: -5px;
+    }
+
+  .cartItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cartItem img {
+  width: 50px; /* 這裡設定圖片寬度，可以根據需要調整 */
+  height: 50px; /* 這裡設定圖片高度，可以根據需要調整 */
+  margin-right: 10px;
+}
+
+.cartItemInfo {
+  display: flex;
+  align-items: center;
+}
+
+.cartItemInfo p {
+  margin: 0;
+  padding-right: 10px;
+}
+    
+/* 水平線樣式 */
+    hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+ 
+  </style>
+</head>
+<body>
+  <header class="header">
+    <!-- Add class "disabled" to disable the link -->
+    <a href="" class="logo disabled">𝒯𝒽𝑒 𝒾𝓈𝓁𝑒 𝑜𝒻 𝒸𝒶𝓉</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li><a href="index.html">首頁</a></li> 
+      <li><a href="https://www.instagram.com/theisleof.cat_ore/" target="_blank">Instagram</a></li>
+      <li><a href="product.html">商品</a></li>
+      <li><a href="cart.html">購物車<span id="cart-count"> 0</span></a></li>
+    </ul>
+  </header>
+    <div class="square" id="square1"></div>
+    <div class="square" id="square2">
+        <div class="cartItems"></div>
+        <hr>
+     <!-- 表單 -->
+  <div style="display: flex; flex-direction: column; align-items: center; border: 1px solid #ccc; padding: 20px; margin: 0 auto; max-width: 500px; background: transparent;">
+    <div style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 20px;">
+      <label for="name">姓名：</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 20px;">
+      <label for="phone">電話：</label>
+      <input type="tel" id="phone" name="phone" required>
+    </div>
+    <div style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 20px;">
+      <label for="email">電子郵件：</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 20px;">
+      <label for="store_name">7-11店號(6碼)：<a href="https://emap.pcsc.com.tw/emap.aspx" target="_blank">門市查詢</a></label>
+      <input type="text" id="store_name" name="store_name" required>
+    </div>
+    <br>
+    <input type="submit" value="商品下訂" onclick="placeOrder()">
+    <br>
+    <button onclick="clearCart()">清空購物車</button>
+  </div>
+</div>
+
+<script>
+  // JavaScript 部分
+  let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+  // 顯示購物車內容
+  function displayCartItems() {
+    const cartItemsDiv = document.querySelector(".cartItems");
+    cartItemsDiv.innerHTML = ""; // 清空購物車內容
+
+    let totalAmount = 0; // 新增变量用于计算总金额
+
+    cartItems.forEach((item) => {
+      const itemDiv = document.createElement("div");
+      itemDiv.classList.add("cartItem");
+
+      const itemImageDiv = document.createElement("div");
+      itemImageDiv.innerHTML = `<img src="${item.imagePath}" alt="${item.productName}" style="width: 150px; height: 150px;">`;
+      itemDiv.appendChild(itemImageDiv);
+
+      const itemInfoDiv = document.createElement("div");
+      itemInfoDiv.classList.add("cartItemInfo");
+      itemInfoDiv.innerHTML = `
+          <p style="font-size: 20px;"><strong>${item.productName}</strong></p>
+          <p style="font-size: 20px;">數量: ${item.quantity}</p>
+          <p style="font-size: 20px;">金額: ${item.price}</p>
+      `;
+      itemDiv.appendChild(itemInfoDiv);
+
+      cartItemsDiv.appendChild(itemDiv);
+
+      totalAmount += item.price; // 计算总金额
+    });
+
+    const totalAmountElement = document.createElement('p');
+    totalAmountElement.textContent = `總金額：$${totalAmount}`;
+    totalAmountElement.style.fontSize = '25px'; // 设置总金额文字的大小
+    cartItemsDiv.appendChild(totalAmountElement);
+  }
+
+  // 清空購物車內容
+  function clearCart() {
+    cartItems = [];
+    localStorage.removeItem('cartItems');
+    displayCartItems(); // 重新顯示空的購物車
+  }
+
+  // 在頁面載入完成後顯示購物車內容
+  window.onload = function () {
+    displayCartItems();
+  };
+
+  function placeOrder() {
+    // 获取表单的输入值
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const store_name = document.getElementById('store_name').value;
+
+    // 获取购物车商品信息
+    const cartItemsJson = JSON.stringify(cartItems);
+
+    // 使用URL参数传递数据到订单确认页面
+    const urlParams = new URLSearchParams({
+      name: name,
+      phone: phone,
+      email: email,
+      store_name: store_name,
+      cartItems: cartItemsJson,
+    });
+
+    // 跳转到订单确认页面，并将数据作为URL参数传递过去
+    window.location.href = `complete.html?${urlParams.toString()}`;
+  }
+</script>
+</body>
+</html>

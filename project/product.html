@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>𝒯𝒽𝑒 𝒾𝓈𝓁𝑒 𝑜𝒻 𝒸𝒶𝓉</title>
+  <style>
+    /* CSS樣式開始 */
+    body {
+      margin: 0;
+      font-family: Helvetica, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    a {
+      color: #000;
+    }
+
+    /* 標頭 */
+    .header {
+      background-color: #fff;
+      box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+      position: fixed;
+      width: 100%;
+      z-index: 3;
+    }
+
+    .header ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .header li a {
+      display: block;
+      padding: 20px 20px;
+      border-right: 1px solid #f4f4f4;
+      text-decoration: none;
+    }
+
+    .header li a:hover,
+    .header .menu-btn:hover {
+      background-color: #f4f4f4;
+    }
+
+    .header .logo {
+      display: block;
+      float: left;
+      font-size: 2em;
+      padding: 10px 20px;
+      text-decoration: none;
+    }
+
+    .header .menu {
+      clear: both;
+      max-height: 0;
+      transition: max-height .2s ease-out;
+    }
+  
+    .header .menu-icon .navicon:before,
+    .header .menu-icon .navicon:after {
+      background: #333;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      transition: all .2s ease-out;
+      width: 100%;
+    }
+
+    .header .menu-icon .navicon:before {
+      top: 0;
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .header .menu-icon .navicon:after {
+      top: 0;
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .header .menu-btn {
+      display: none;
+    }
+
+    .header .menu-btn:checked ~ .menu {
+      max-height: 240px;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon {
+      background: transparent;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:before {
+      transform: rotate(0);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:after {
+      transform: rotate(0);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+      top: 0;
+    }
+
+    /* 使用此樣式來禁用連結 */
+    .header .logo.disabled {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    @media (min-width: 48em) {
+      .header li {
+        float: left;
+      }
+      .header li a {
+        padding: 20px 30px;
+      }
+      .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+      }
+      .header .menu-icon {
+        display: none;
+      }
+    }
+    .header .menu ul {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 0;
+      margin-top: 20px;
+      min-width: 120px;
+      z-index: 2;
+    }
+
+    .header .menu ul li {
+      padding: 10px;
+      list-style: none;
+    }
+
+    .header .menu ul li a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .header .menu ul li a:hover {
+      background-color: #f4f4f4;
+    }
+    .header a:hover {
+    /* 添加颜色 */
+    color: #2F6F65;
+    /* 添加文本阴影 */
+    text-shadow: 0 0 10px #92D6B9;
+    }
+    
+
+    /* 正方形 */
+    .square {
+      width: 100px;
+      height: 100px;
+      margin: 0px;
+      float: left;
+      position: relative;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    /* 正方形1 */
+    #square1 {
+      width: 100%;
+      height: 800px;
+      background-color: red;
+      margin-top: 51px;
+      background-image: url('/image/test1.png');
+      background-size: 100% 800px;
+      background-color: transparent; /* 將背景色設置為透明 */
+    }
+
+    /* 正方形2 */
+    #square2 {
+      width: 100%;
+      height: auto; /* 使用auto讓正方形2的高度自動調整，以容納內容 */
+      background-color: yellow;
+      top: 0; /* 保持在頁面頂部 */
+      background-image: url('/image/test2.png');
+      background-repeat: no-repeat;
+      background-size: cover; /* 使用cover讓背景圖片等比例填滿整個 square2 */
+    }
+    
+    /* 商品格 */
+      .grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 將格子置中 */
+    align-items: center; /* 將格子垂直置中 */
+    
+  }
+
+  .grid-item {
+    flex: 0 0 calc(30% - 20px); /* 讓每個格子佔三等份並設置間距 */
+    margin: 10px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  .grid-item img {
+  max-width: 200%;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* 加入購物車按鈕 */
+.add-to-cart-btn {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #ff8533;
+}
+
+/* 購物車數字樣式 */
+#cart-count {
+  background-color: #ff6600;
+  color: #fff;
+  border-radius: 50%;
+  padding: 5px 10px;
+  margin-left: 5px;
+  font-size: 0.8em;
+  position: relative;
+  top: -5px;
+}
+
+
+  </style> 
+</head>
+<body>
+  <header class="header">
+    <!-- 使用類別 "disabled" 來禁用連結 -->
+    <a href="" class="logo disabled">𝒯𝒽𝑒 𝒾𝓈𝓁𝑒 𝑜𝒻 𝒸𝒶𝓉</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li><a href="index.html">首頁</a></li> 
+      <li><a href="https://www.instagram.com/theisleof.cat_ore/" target="_blank">Instagram</a></li>
+      <li><a href="product.html">商品</a></li>
+      <li><a href="cart.html">購物車<span id="cart-count"> 0</span></a></li>
+    </ul>
+    
+  </header>
+  <div class="square" id="square1"></div>
+<!-- 在 square2 區塊中添加 3x3 的格子佈局 -->
+<div class="square" id="square2">
+  <div class="grid-container">
+    <!-- 第一個格子 -->
+    <div class="grid-item">
+      <img src="/image/1.png" alt="Item 1">
+      <p>藍銅孔雀</p>
+      <p>金額：$580</p>
+      <button class="add-to-cart-btn" onclick="addToCart('藍銅孔雀', 580, 1, '/image/1.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/2.png" alt="Item 2">
+      <p>藍銅孔雀</p>
+      <p>金額：$1380</p>
+      <button class="add-to-cart-btn" onclick="addToCart('藍銅孔雀', 1380, 1, '/image/2.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/3.png" alt="Item 3">
+      <p>藍銅孔雀</p>
+      <p>金額：$380</p>
+      <button class="add-to-cart-btn" onclick="addToCart('藍銅孔雀', 380, 1, '/image/3.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/4.png" alt="Item 4">
+      <p>瑤崗仙<br>
+        螢石共生雲母毒沙
+      </p>
+      <p>金額：$2250</p>
+      <button class="add-to-cart-btn" onclick="addToCart('螢石共生雲母毒沙', 2250, 1, '/image/4.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/5.png" alt="Item 5">
+      <p>瑤崗仙<br>
+      螢石毒沙脆硫銻鉛礦
+      </p>
+      <p>金額：$2250</p>
+      <button class="add-to-cart-btn" onclick="addToCart('螢石毒沙脆硫銻鉛礦', 2250, 1, '/image/5.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/6.png" alt="Item 6">
+      <p>瑤崗仙<br>
+      螢石綠泥白雲石
+      </p>
+      <p>金額：$380</p>
+      <button class="add-to-cart-btn" onclick="addToCart('螢石綠泥白雲石', 380, 1, '/image/6.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/7.png" alt="Item 7">
+      <p>氟鋁石膏<br>
+      濃焦糖巧克力
+      </p>
+      <p>金額：$1480</p>
+       <button class="add-to-cart-btn" onclick="addToCart('氟鋁石膏_濃焦糖巧克力', 1480, 1, '/image/7.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/8.png" alt="Item 8">
+      <p>氟鋁石膏<br>
+      濃焦糖巧克力
+      </p>
+      <p>金額：$1280</p>
+      <button class="add-to-cart-btn" onclick="addToCart('氟鋁石膏_濃焦糖巧克力', 1280, 1, '/image/8.png')">加入購物車</button>
+</div>
+
+    <div class="grid-item">
+      <img src="/image/9.png" alt="Item 9">
+      <p>氟鋁石膏<br>
+      巧克力脆片餅乾
+      </p>
+      <p>金額：$1180</p>
+      <button class="add-to-cart-btn" onclick="addToCart('氟鋁石膏_巧克力脆片餅乾', 1180, 1, '/image/9.png')">加入購物車</button>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+    // JavaScript 部分
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  
+    function addToCart(productName, price, quantity, imagePath) {
+      cartItems.push({
+        productName: productName,
+        price: price,
+        quantity: quantity,
+        imagePath: imagePath // 新增商品圖片路徑屬性
+      });
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      updateCartIcon();
+    }
+  
+    function updateCartIcon() {
+      const cartCount = document.getElementById("cart-count");
+      cartCount.textContent = cartItems.length;
+    }
+  </script>
+</body>
+</html>
